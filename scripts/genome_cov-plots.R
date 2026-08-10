@@ -50,17 +50,23 @@ qc_summary <- df_parsed %>%
 qc_summary_condition <- qc_summary %>%
   filter(sample_type != "Brain") %>%
   group_by(sample_type, temp, timepoint) %>%
-  summarise(across(
-    c(mean_depth, pct_10x:pct_100x),
-    list(mean = mean, sd = sd),
-    na.rm = TRUE
-  ), n_samples = n(), .groups = "drop")
+  summarise(
+    across(
+      c(mean_depth, pct_10x:pct_100x),
+      list(
+        mean = \(x) mean(x, na.rm = TRUE),
+        sd   = \(x) sd(x, na.rm = TRUE)
+      )
+    ),
+    n_samples = n(),
+    .groups = "drop"
+  )
 
 #---------------------------
 # 4. Reshape for plotting multiple coverage thresholds
 #---------------------------
-coverage_cols <- c("pct_10x_mean", "pct_20x_mean", "pct_50x_mean", "pct_100x_mean")
-sd_cols <- c("pct_10x_sd", "pct_20x_sd", "pct_50x_sd", "pct_100x_sd")
+coverage_cols <- c("pct_10x_mean", "pct_20x_mean","pct_50x_mean", "pct_100x_mean")
+sd_cols <- c("pct_10x_sd",  "pct_20x_sd", "pct_50x_sd", "pct_100x_sd")
 
 qc_long <- qc_summary_condition %>%
   pivot_longer(
@@ -70,8 +76,8 @@ qc_long <- qc_summary_condition %>%
   ) %>%
   mutate(
     coverage = factor(str_extract(coverage_metric, "\\d+"),
-                      levels = c("10", "20", "50", "100"),
-                      labels = c("10x", "20x", "50x", "100x"))
+                      levels = c("10", "20,","50", "100"),
+                      labels = c("10x", "20x","50x", "100x"))
   ) %>%
   # add corresponding SD
   mutate(sd_value = case_when(
@@ -140,12 +146,11 @@ p_coverage_profiles <- ggplot(plot_df,
   theme(strip.text = element_text(face = "bold", size = 12),
         legend.position = "bottom")
 
-ggsave("figures/coverage_profiles.png", p_coverage_profiles, width = 14, height = 8, dpi = 600)
-ggsave("figures/coverage_profiles.pdf", p_coverage_profiles, width = 14, height = 8)
+# ggsave("figures/coverage_profiles.png", p_coverage_profiles, width = 14, height = 8, dpi = 600)
+# ggsave("figures/coverage_profiles.pdf", p_coverage_profiles, width = 14, height = 8)
 
 # Mean ± SD plots for each threshold
 plot_mean_sd(qc_long %>% filter(coverage == "10x"), "mean_value", "% genome ≥10× coverage", "coverage_10x")
-plot_mean_sd(qc_long %>% filter(coverage == "20x"), "mean_value", "% genome ≥20× coverage", "coverage_20x")
 plot_mean_sd(qc_long %>% filter(coverage == "50x"), "mean_value", "% genome ≥50× coverage", "coverage_50x")
 plot_mean_sd(qc_long %>% filter(coverage == "100x"), "mean_value", "% genome ≥100× coverage", "coverage_100x")
 
@@ -158,6 +163,7 @@ p_all_cov <- ggplot(qc_long, aes(x = timepoint, y = mean_value,
                   ymax = mean_value + sd_value,
                   fill = sample_type),
               alpha = 0.2, colour = NA) +
+  geom_hline(yintercept = 90, linetype = "dashed", colour = "black") +
   facet_grid(coverage ~ temp, scales = "free_y") +
   scale_colour_manual(values = palette) +
   scale_fill_manual(values = palette) +
@@ -172,63 +178,301 @@ p_all_cov <- ggplot(qc_long, aes(x = timepoint, y = mean_value,
   theme(legend.position = "bottom",
         strip.text = element_text(face = "bold", size = 12))
 
-ggsave("figures/coverage_all_thresholds.png", p_all_cov, width = 12, height = 10, dpi = 600)
-ggsave("figures/coverage_all_thresholds.pdf", p_all_cov, width = 12, height = 10)
+# ggsave("figures/coverage_all_thresholds.png", p_all_cov, width = 12, height = 10, dpi = 600)
+# ggsave("figures/coverage_all_thresholds.pdf", p_all_cov, width = 12, height = 10)
 
 
-#---------------------------
-# 8. Prepare variables for linear model
-#---------------------------
+#==================================================
+# 8. Statistical analysis
+#==================================================
 
-library(tidyverse)
-library(ggplot2)
-library(broom)
-library(viridis)
+library(lme4)
+library(lmerTest)
+library(emmeans)
+library(DHARMa)
 
-#-----------------------------------------
-# 1. Prepare QC summary (already done)
-#-----------------------------------------
+# Read sequencing summary data
 
-qc_summary_condition <- qc_summary %>%
+seq_summary <- read.csv("raw/4aug26_FTA_RDT_study_seq_data - Summary.csv")
+
+# Check columns
+
+names(seq_summary)
+qc_summary <- qc_summary %>%
+  left_join(
+    seq_summary %>%
+      select(sample_id, mapped_reads),
+    by = "sample_id"
+  )
+#--------------------------------------------------
+# Prepare analysis dataset
+#--------------------------------------------------
+# Exclude fresh brain controls for preservation comparisons
+# Brain is retained separately as the gold-standard baseline
+
+analysis_conditions <- qc_summary %>%
   filter(sample_type != "Brain") %>%
-  group_by(sample_type, temp, timepoint) %>%
-  summarise(across(pct_10x:pct_100x, list(mean = mean, sd = sd), na.rm = TRUE),
-            n_samples = n(), .groups = "drop")
-
-# Define thresholds
-coverage_cols <- c("pct_10x_mean", "pct_20x_mean", "pct_50x_mean", "pct_100x_mean")
-
-# Run linear models and show summaries
-lm_results <- lapply(coverage_cols, function(col) {
-  formula <- as.formula(paste(col, "~ sample_type * timepoint + temp * timepoint"))
-  lm_model <- lm(formula, data = qc_summary_condition)
-  cat("\n====", col, "====\n")
-  print(summary(lm_model))
-  return(lm_model)
-})
-
-# Optional: name the list for easier reference
-names(lm_results) <- coverage_cols
+  mutate(
+    sample_type = factor(sample_type),
+    temp = factor(temp),
+    timepoint = factor(timepoint)
+  )
 
 
-summary(lm_results[["pct_10x_mean"]]) 
-summary(lm_results[["pct_20x_mean"]]) 
-summary(lm_results[["pct_50x_mean"]]) 
-summary(lm_results[["pct_100x_mean"]])   
+# Set biologically meaningful reference groups
+
+analysis_conditions$sample_type <- relevel(
+  analysis_conditions$sample_type,
+  ref = "FTA"
+)
+
+analysis_conditions$temp <- relevel(
+  analysis_conditions$temp,
+  ref = "RT"
+)
+
+analysis_conditions$timepoint <- relevel(
+  analysis_conditions$timepoint,
+  ref = "1"
+)
 
 
-# Model with just main effect of timepoint
-lm_simple <- lm(pct_100x_mean ~ timepoint, data = qc_summary_condition)
+#==================================================
+# MODEL 1
+# Sequencing yield: mapped reads
+#==================================================
 
-# Model with sample_type interaction
-lm_sample_int <- lm(pct_100x_mean ~ sample_type * timepoint, data = qc_summary_condition)
+# Response should be log transformed because read counts are skewed
+hist(analysis_conditions$mapped_read)
+mapped_model <- lmer(
+  log10(mapped_reads + 1) ~ sample_type * temp * timepoint +
+    (1 | sample_id),
+  data = analysis_conditions
+)
 
-# Model with temp interaction
-lm_temp_int <- lm(pct_100x_mean ~ temp * timepoint, data = qc_summary_condition)
+summary(mapped_model)
 
-# Full model (both interactions)
-lm_full <- lm(pct_100x_mean ~ sample_type * timepoint + temp * timepoint, data = qc_summary_condition)
+anova(mapped_model)
 
-# Compare models with ANOVA
-anova(lm_simple, lm_sample_int, lm_temp_int, lm_full)
 
+# Pairwise comparisons
+
+emmeans(
+  mapped_model,
+  pairwise ~ sample_type
+)
+
+
+# Plot mapped reads
+
+p_reads <- ggplot(
+  analysis_conditions,
+  aes(
+    x = timepoint,
+    y = log10(mapped_reads + 1),
+    colour = sample_type,
+    group = sample_type
+  )
+) +
+  stat_summary(
+    fun = mean,
+    geom = "line",
+    linewidth = 1.2
+  ) +
+  stat_summary(
+    fun.data = mean_se,
+    geom = "errorbar",
+    width = 0.1
+  ) +
+  facet_wrap(~temp) +
+  labs(
+    x = "Days post preservation",
+    y = "log10(mapped reads + 1)",
+    colour = "Sample type",
+    title = "Sequencing yield across preservation conditions"
+  ) +
+  theme_minimal(base_size = 14)
+
+p_reads
+
+
+
+#==================================================
+# MODEL 2
+# Primary genome recovery endpoint
+# % genome covered ≥20x
+#==================================================
+
+coverage20_model <- lmer(
+  pct_20x ~ sample_type * temp * timepoint +
+    (1 | sample_id),
+  data = analysis_conditions
+)
+
+summary(coverage20_model)
+
+anova(coverage20_model)
+
+
+emmeans(
+  coverage20_model,
+  pairwise ~ sample_type
+)
+
+
+# Plot
+
+p_20x <- ggplot(
+  analysis_conditions,
+  aes(
+    x = timepoint,
+    y = pct_20x,
+    colour = sample_type,
+    group = sample_type
+  )
+) +
+  stat_summary(
+    fun = mean,
+    geom = "line",
+    linewidth = 1.2
+  ) +
+  stat_summary(
+    fun.data = mean_se,
+    geom = "errorbar",
+    width = 0.1
+  ) +
+  facet_wrap(~temp) +
+  geom_hline(
+    yintercept = 90,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Days post preservation",
+    y = "% genome covered ≥20×",
+    colour = "Sample type",
+    title = "Genome recovery at 20× depth"
+  ) +
+  theme_minimal(base_size = 14)
+
+p_20x
+
+
+
+#==================================================
+# MODEL 3
+# High-depth genome recovery
+#==================================================
+
+coverage_threshold_models <- list(
+  
+  "50x" = lmer(
+    pct_50x ~ sample_type * temp * timepoint +
+      (1 | sample_id),
+    data = analysis_conditions
+  ),
+  
+  "100x" = lmer(
+    pct_100x ~ sample_type * temp * timepoint +
+      (1 | sample_id),
+    data = analysis_conditions
+  )
+)
+
+
+# Results
+
+lapply(
+  coverage_threshold_models,
+  anova
+)
+
+
+# Pairwise FTA vs RDT
+
+emmeans(
+  coverage_threshold_models$`100x`,
+  pairwise ~ sample_type
+)
+
+
+#==================================================
+# Plot all depth thresholds
+#==================================================
+
+threshold_long <- analysis_conditions %>%
+  pivot_longer(
+    cols = c(pct_20x, pct_50x, pct_100x),
+    names_to = "threshold",
+    values_to = "coverage"
+  )
+
+
+p_thresholds <- ggplot(
+  threshold_long,
+  aes(
+    x = timepoint,
+    y = coverage,
+    colour = sample_type,
+    group = sample_type
+  )
+) +
+  stat_summary(
+    fun = mean,
+    geom = "line",
+    linewidth = 1
+  ) +
+  stat_summary(
+    fun.data = mean_se,
+    geom = "errorbar",
+    width = 0.1
+  ) +
+  facet_grid(threshold ~ temp) +
+  geom_hline(
+    yintercept = 90,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Days post preservation",
+    y = "% genome recovered",
+    colour = "Sample type",
+    title = "Genome recovery across sequencing depth thresholds"
+  ) +
+  theme_minimal(base_size = 14)
+
+p_thresholds
+
+
+
+#==================================================
+# Brain-normalised recovery
+# Secondary analysis
+#==================================================
+
+brain_comparison <- qc_summary %>%
+  filter(sample_type != "Brain") %>%
+  left_join(
+    qc_summary %>%
+      filter(sample_type == "Brain") %>%
+      select(
+        sample_id,
+        brain_pct20x = pct_20x
+      ),
+    by="sample_id"
+  ) %>%
+  mutate(
+    relative_recovery = pct_20x / brain_pct20x * 100,
+    sample_type = factor(sample_type),
+    temp = factor(temp),
+    timepoint = factor(timepoint)
+  )
+
+
+brain_model <- lmer(
+  relative_recovery ~ sample_type * temp * timepoint +
+    (1 | sample_id),
+  data = brain_comparison
+)
+
+summary(brain_model)
+
+anova(brain_model)

@@ -1,0 +1,261 @@
+"Sample_Name","Time","Cq","Sample_ID","Medium","Temperature","Baseline_Cq","Delta_Cq"
+"FTA_RT_S1","D0",NA,"S1","FTA","Ambient",23.27,NA
+"FTA_RT_S1","D1",NA,"S1","FTA","Ambient",23.27,NA
+"FTA_RT_S1","D3",20.3,"S1","FTA","Ambient",23.27,-2.97
+"FTA_RT_S1","D7",18.72,"S1","FTA","Ambient",23.27,-4.55
+"FTA_RT_S1","D21",19.32,"S1","FTA","Ambient",23.27,-3.95
+"FTA_37_S1","D0",NA,"S1","FTA","37°C",23.27,NA
+"FTA_37_S1","D1",18.68,"S1","FTA","37°C",23.27,-4.59
+"FTA_37_S1","D3",18.77,"S1","FTA","37°C",23.27,-4.5
+"FTA_37_S1","D7",19.01,"S1","FTA","37°C",23.27,-4.26
+"FTA_37_S1","D21",21.02,"S1","FTA","37°C",23.27,-2.25
+"RDT_RT_S1","D0",NA,"S1","RDT","Ambient",23.27,NA
+"RDT_RT_S1","D1",22.42,"S1","RDT","Ambient",23.27,-0.849999999999998
+"RDT_RT_S1","D3",23.37,"S1","RDT","Ambient",23.27,0.100000000000001
+"RDT_RT_S1","D7",23.5,"S1","RDT","Ambient",23.27,0.23
+"RDT_RT_S1","D21",22.85,"S1","RDT","Ambient",23.27,-0.419999999999998
+"RDT_37_S1","D0",NA,"S1","RDT","37°C",23.27,NA
+"RDT_37_S1","D1",23.14,"S1","RDT","37°C",23.27,-0.129999999999999
+"RDT_37_S1","D3",24.23,"S1","RDT","37°C",23.27,0.960000000000001
+"RDT_37_S1","D7",23.28,"S1","RDT","37°C",23.27,0.0100000000000016
+"RDT_37_S1","D21",24.46,"S1","RDT","37°C",23.27,1.19
+"FTA_RT_S2","D0",NA,"S2","FTA","Ambient",16.15,NA
+"FTA_RT_S2","D1",14.46,"S2","FTA","Ambient",16.15,-1.69
+"FTA_RT_S2","D3",14.5,"S2","FTA","Ambient",16.15,-1.65
+"FTA_RT_S2","D7",14.16,"S2","FTA","Ambient",16.15,-1.99
+"FTA_RT_S2","D21",14.88,"S2","FTA","Ambient",16.15,-1.27
+"FTA_37_S2","D0",NA,"S2","FTA","37°C",16.15,NA
+"FTA_37_S2","D1",14.25,"S2","FTA","37°C",16.15,-1.9
+"FTA_37_S2","D3",14.21,"S2","FTA","37°C",16.15,-1.94
+"FTA_37_S2","D7",15.07,"S2","FTA","37°C",16.15,-1.08
+"FTA_37_S2","D21",15.62,"S2","FTA","37°C",16.15,-0.529999999999999
+"RDT_RT_S2","D0",NA,"S2","RDT","Ambient",16.15,NA
+"RDT_RT_S2","D1",21.03,"S2","RDT","Ambient",16.15,4.88
+"RDT_RT_S2","D3",21.17,"S2","RDT","Ambient",16.15,5.02
+"RDT_RT_S2","D7",20.83,"S2","RDT","Ambient",16.15,4.68
+"RDT_RT_S2","D21",21.5,"S2","RDT","Ambient",16.15,5.35
+"RDT_37_S2","D0",NA,"S2","RDT","37°C",16.15,NA
+"RDT_37_S2","D1",22.26,"S2","RDT","37°C",16.15,6.11
+"RDT_37_S2","D3",21.96,"S2","RDT","37°C",16.15,5.81
+"RDT_37_S2","D7",21.45,"S2","RDT","37°C",16.15,5.3
+"RDT_37_S2","D21",22.57,"S2","RDT","37°C",16.15,6.42
+"FTA_RT_S3","D0",NA,"S3","FTA","Ambient",17.6,NA
+"FTA_RT_S3","D1",17.75,"S3","FTA","Ambient",17.6,0.149999999999999
+"FTA_RT_S3","D3",17.92,"S3","FTA","Ambient",17.6,0.32
+"FTA_RT_S3","D7",16.18,"S3","FTA","Ambient",17.6,-1.42
+"FTA_RT_S3","D21",17.43,"S3","FTA","Ambient",17.6,-0.170000000000002
+"FTA_37_S3","D0",NA,"S3","FTA","37°C",17.6,NA
+"FTA_37_S3","D1",17.51,"S3","FTA","37°C",17.6,-0.0899999999999999
+"FTA_37_S3","D3",18.07,"S3","FTA","37°C",17.6,0.469999999999999
+"FTA_37_S3","D7",16.58,"S3","FTA","37°C",17.6,-1.02
+"FTA_37_S3","D21",17.17,"S3","FTA","37°C",17.6,-0.43
+"RDT_RT_S3","D0",NA,"S3","RDT","Ambient",17.6,NA
+"RDT_RT_S3","D1",21.85,"S3","RDT","Ambient",17.6,4.25
+"RDT_RT_S3","D3",22.1,"S3","RDT","Ambient",17.6,4.5
+"RDT_RT_S3","D7",22.57,"S3","RDT","Ambient",17.6,4.97
+"RDT_RT_S3","D21",22.87,"S3","RDT","Ambient",17.6,5.27
+"RDT_37_S3","D0",NA,"S3","RDT","37°C",17.6,NA
+"RDT_37_S3","D1",21.98,"S3","RDT","37°C",17.6,4.38
+"RDT_37_S3","D3",22.25,"S3","RDT","37°C",17.6,4.65
+"RDT_37_S3","D7",22.19,"S3","RDT","37°C",17.6,4.59
+"RDT_37_S3","D21",24.32,"S3","RDT","37°C",17.6,6.72
+"FTA_RT_S4","D0",NA,"S4","FTA","Ambient",15.16,NA
+"FTA_RT_S4","D1",18.39,"S4","FTA","Ambient",15.16,3.23
+"FTA_RT_S4","D3",17.91,"S4","FTA","Ambient",15.16,2.75
+"FTA_RT_S4","D7",19.09,"S4","FTA","Ambient",15.16,3.93
+"FTA_RT_S4","D21",21.19,"S4","FTA","Ambient",15.16,6.03
+"FTA_37_S4","D0",NA,"S4","FTA","37°C",15.16,NA
+"FTA_37_S4","D1",17.63,"S4","FTA","37°C",15.16,2.47
+"FTA_37_S4","D3",18.76,"S4","FTA","37°C",15.16,3.6
+"FTA_37_S4","D7",21.01,"S4","FTA","37°C",15.16,5.85
+"FTA_37_S4","D21",24.39,"S4","FTA","37°C",15.16,9.23
+"RDT_RT_S4","D0",NA,"S4","RDT","Ambient",15.16,NA
+"RDT_RT_S4","D1",20.8,"S4","RDT","Ambient",15.16,5.64
+"RDT_RT_S4","D3",21.56,"S4","RDT","Ambient",15.16,6.4
+"RDT_RT_S4","D7",NA,"S4","RDT","Ambient",15.16,NA
+"RDT_RT_S4","D21",24.15,"S4","RDT","Ambient",15.16,8.99
+"RDT_37_S4","D0",NA,"S4","RDT","37°C",15.16,NA
+"RDT_37_S4","D1",21.33,"S4","RDT","37°C",15.16,6.17
+"RDT_37_S4","D3",22.09,"S4","RDT","37°C",15.16,6.93
+"RDT_37_S4","D7",22.66,"S4","RDT","37°C",15.16,7.5
+"RDT_37_S4","D21",23.75,"S4","RDT","37°C",15.16,8.59
+"FTA_RT_S5","D0",NA,"S5","FTA","Ambient",18.28,NA
+"FTA_RT_S5","D1",17.01,"S5","FTA","Ambient",18.28,-1.27
+"FTA_RT_S5","D3",17.21,"S5","FTA","Ambient",18.28,-1.07
+"FTA_RT_S5","D7",18.06,"S5","FTA","Ambient",18.28,-0.220000000000002
+"FTA_RT_S5","D21",20.04,"S5","FTA","Ambient",18.28,1.76
+"FTA_37_S5","D0",NA,"S5","FTA","37°C",18.28,NA
+"FTA_37_S5","D1",17.3,"S5","FTA","37°C",18.28,-0.98
+"FTA_37_S5","D3",17.71,"S5","FTA","37°C",18.28,-0.57
+"FTA_37_S5","D7",19.79,"S5","FTA","37°C",18.28,1.51
+"FTA_37_S5","D21",21.08,"S5","FTA","37°C",18.28,2.8
+"RDT_RT_S5","D0",NA,"S5","RDT","Ambient",18.28,NA
+"RDT_RT_S5","D1",23.5,"S5","RDT","Ambient",18.28,5.22
+"RDT_RT_S5","D3",23.51,"S5","RDT","Ambient",18.28,5.23
+"RDT_RT_S5","D7",23.36,"S5","RDT","Ambient",18.28,5.08
+"RDT_RT_S5","D21",25.7,"S5","RDT","Ambient",18.28,7.42
+"RDT_37_S5","D0",NA,"S5","RDT","37°C",18.28,NA
+"RDT_37_S5","D1",24.41,"S5","RDT","37°C",18.28,6.13
+"RDT_37_S5","D3",25.19,"S5","RDT","37°C",18.28,6.91
+"RDT_37_S5","D7",24.8,"S5","RDT","37°C",18.28,6.52
+"RDT_37_S5","D21",26.03,"S5","RDT","37°C",18.28,7.75
+"N1 - FTA","D0",21.31,NA,"FTA","Baseline",NA,NA
+"N1 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N1 - FTA","D3",22.04,NA,"FTA","Baseline",NA,NA
+"N1 - FTA","D7",20.6,NA,"FTA","Baseline",NA,NA
+"N1 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N1 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N1 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N1 - RDT","D3",25.07,NA,"RDT","Baseline",NA,NA
+"N1 - RDT","D7",26.22,NA,"RDT","Baseline",NA,NA
+"N1 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N2 - FTA","D0",23.06,NA,"FTA","Baseline",NA,NA
+"N2 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N2 - FTA","D3",20.43,NA,"FTA","Baseline",NA,NA
+"N2 - FTA","D7",20.05,NA,"FTA","Baseline",NA,NA
+"N2 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N2 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N2 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N2 - RDT","D3",23.63,NA,"RDT","Baseline",NA,NA
+"N2 - RDT","D7",24.97,NA,"RDT","Baseline",NA,NA
+"N2 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N3 - FTA","D0",22.74,NA,"FTA","Baseline",NA,NA
+"N3 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N3 - FTA","D3",19.19,NA,"FTA","Baseline",NA,NA
+"N3 - FTA","D7",18.16,NA,"FTA","Baseline",NA,NA
+"N3 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N3 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N3 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N3 - RDT","D3",21.76,NA,"RDT","Baseline",NA,NA
+"N3 - RDT","D7",22.87,NA,"RDT","Baseline",NA,NA
+"N3 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N4 - FTA","D0",21.99,NA,"FTA","Baseline",NA,NA
+"N4 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N4 - FTA","D3",22.92,NA,"FTA","Baseline",NA,NA
+"N4 - FTA","D7",22.97,NA,"FTA","Baseline",NA,NA
+"N4 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N4 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N4 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N4 - RDT","D3",24.38,NA,"RDT","Baseline",NA,NA
+"N4 - RDT","D7",26.09,NA,"RDT","Baseline",NA,NA
+"N4 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N5 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N5 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N5 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N5 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N5 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N5 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N5 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N5 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N5 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N5 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N6 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N6 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N6 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N6 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N6 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N6 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N6 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N6 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N6 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N6 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N7 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N7 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N7 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N7 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N7 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N7 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N7 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N7 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N7 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N7 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N8 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N8 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N8 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N8 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N8 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N8 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N8 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N8 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N8 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N8 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N9 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N9 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N9 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N9 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N9 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N9 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N9 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N9 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N9 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N9 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N10 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N10 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N10 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N10 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N10 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N10 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N10 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N10 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N10 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N10 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N11 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N11 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N11 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N11 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N11 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N11 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N11 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N11 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N11 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N11 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N12 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N12 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N12 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N12 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N12 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N12 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N12 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N12 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N12 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N12 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N13 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N13 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N13 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N13 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N13 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N13 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N13 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N13 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N13 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N13 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N14 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N14 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N14 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N14 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N14 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N14 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N14 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N14 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N14 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N14 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N15 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N15 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N15 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N15 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N15 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N15 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N15 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N15 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N15 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N15 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
+"N16 - FTA","D0",NA,NA,"FTA","Baseline",NA,NA
+"N16 - FTA","D1",NA,NA,"FTA","Baseline",NA,NA
+"N16 - FTA","D3",NA,NA,"FTA","Baseline",NA,NA
+"N16 - FTA","D7",NA,NA,"FTA","Baseline",NA,NA
+"N16 - FTA","D21",NA,NA,"FTA","Baseline",NA,NA
+"N16 - RDT","D0",NA,NA,"RDT","Baseline",NA,NA
+"N16 - RDT","D1",NA,NA,"RDT","Baseline",NA,NA
+"N16 - RDT","D3",NA,NA,"RDT","Baseline",NA,NA
+"N16 - RDT","D7",NA,NA,"RDT","Baseline",NA,NA
+"N16 - RDT","D21",NA,NA,"RDT","Baseline",NA,NA
