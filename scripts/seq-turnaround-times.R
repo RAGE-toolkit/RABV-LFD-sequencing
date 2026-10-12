@@ -7,7 +7,7 @@ library(lubridate)
 library(Polychrome)
 library(patchwork)
 
-epi <- read.csv("raw/18aug26-mimaropa-outbreak-animal.csv")
+epi <- read.csv("raw/21sep26-mimaropa-outbreak-animal.csv")
 gen <- read_csv("raw/18aug26-mimaropa-seq.csv", show_col_types = FALSE)
 names(epi); names(gen)
 
@@ -28,6 +28,7 @@ gen <- gen %>%
 combined <- epi %>%
   left_join(gen, by = c("CASE_NO" = "case_number"))
 combined
+
 
 # Collect dates for key points in pipeline
 # Sample collection - RDT test - FTA test - Sequencing
@@ -97,12 +98,15 @@ tat <- tat %>%
       as.numeric(DATE_RDT - DATE_SAMPLE_COLLECTION),
     tat_rdt_dfat =
       as.numeric(  DATE_DFAT  - DATE_RDT),
+    tat_dfat_seq =
+      as.numeric( Date_sequenced  - DATE_DFAT),
     # Overall
     tat_total =
       as.numeric(Date_sequenced - DATE_SAMPLE_COLLECTION)
   )
 
 #
+summary(tat$tat_dfat_seq)
 summary(tat$tat_total)
 
 # Individual sample timelines
@@ -159,12 +163,12 @@ timeline <- timeline %>%
     CASE_NO = reorder(CASE_NO, collection_date)
   )
 
-# 178 samples with sequence data:
+
 nrow(timeline)
-# 638 stages recorded
+# 697 stages recorded
 
 n_distinct(timeline$CASE_NO)
-# over 178 unique samples
+# over 180 unique samples
 
 # timeline <- timeline %>%
 #   mutate(year = year(date))
@@ -285,7 +289,7 @@ timeline_plot <- ggplot(
   ) +
   labs(
     x = "Date",
-    y = "Samples",
+    y = "Per sample",
     shape = NULL
   ) +
   theme_classic(base_size = 14) +
@@ -300,7 +304,8 @@ timeline_plot <- ggplot(
       linewidth = 0.5
     ),
     legend.key = element_blank(),
-    legend.margin = margin(0, 0, 0, 0)
+    legend.key.width = unit(0.5, "lines"),
+    legend.margin = margin(0.2, 0.2, 0.2, 0.2)
   )+
   guides(colour = "none");timeline_plot
 
@@ -313,6 +318,7 @@ tat_long <- tat %>%
     CASE_NO,
     tat_collection_rdt,
     tat_rdt_dfat,
+    tat_dfat_seq,
     tat_total
   ) %>%
   pivot_longer(
@@ -326,11 +332,13 @@ tat_long <- tat %>%
       levels = c(
         "tat_collection_rdt",
         "tat_rdt_dfat", 
+        "tat_dfat_seq",
         "tat_total"
       ),
       labels = c(
         "Collection → RDT",
         "RDT → DFAT confirmation",
+        "DFAT confirmation → Sequence",
         "Sample → Sequence"
       )
     )
@@ -395,14 +403,14 @@ ggplot(tat_long, aes(x = stage, y = days)) +
   theme_classic()
 
 # improvement over time:
-ggplot(tat, aes(x = DATE_SAMPLE_COLLECTION, y = tat_total)) +
+ggplot(tat, aes(x = DATE_DFAT, y = tat_dfat_seq)) +
   geom_point(alpha = 0.5) +
   geom_smooth(
     method = "loess",
     se = TRUE
   ) +
   labs(
-    x = "Sample collection date",
+    x = "DFAT confirmation date",
     y = "Overall turnaround time (days)"
   ) +
   theme_classic()
@@ -410,7 +418,7 @@ ggplot(tat, aes(x = DATE_SAMPLE_COLLECTION, y = tat_total)) +
 tat_time <- tat %>%
   mutate(
     collection_quarter = floor_date(
-      DATE_SAMPLE_COLLECTION,
+      DATE_DFAT,
       unit = "quarter"
     )
   )
@@ -419,9 +427,9 @@ tat_quarterly <- tat_time %>%
   group_by(collection_quarter) %>%
   summarise(
     n = n(),
-    median_TAT = median(tat_total, na.rm = TRUE),
-    IQR_low = quantile(tat_total, 0.25, na.rm = TRUE),
-    IQR_high = quantile(tat_total, 0.75, na.rm = TRUE),
+    median_TAT = median(tat_dfat_seq, na.rm = TRUE),
+    IQR_low = quantile(tat_dfat_seq, 0.25, na.rm = TRUE),
+    IQR_high = quantile(tat_dfat_seq, 0.75, na.rm = TRUE),
     .groups = "drop"
   )
 
@@ -445,24 +453,24 @@ ggplot(
   theme_classic()
 
 model <- lm(
-  tat_total ~ DATE_SAMPLE_COLLECTION,
+  tat_total ~ DATE_DFAT,
   data = tat
 )
 
 summary(model)
 
 tat %>%
-  mutate(year = year(DATE_SAMPLE_COLLECTION)) %>%
+  mutate(year = year(DATE_DFAT)) %>%
   group_by(year) %>%
   summarise(
     n = n(),
-    median_TAT = median(tat_total, na.rm = TRUE),
-    IQR = IQR(tat_total, na.rm = TRUE)
+    median_TAT = median(tat_dfat_seq, na.rm = TRUE),
+    IQR = IQR(tat_dfat_seq, na.rm = TRUE)
   )
 
 ggplot(
-  tat %>% mutate(year = year(DATE_SAMPLE_COLLECTION)),
-  aes(x = factor(year), y = tat_total)
+  tat %>% mutate(year = year(DATE_DFAT)),
+  aes(x = factor(year), y = tat_dfat_seq)
 ) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(
@@ -478,8 +486,8 @@ ggplot(
 tat_panel <- ggplot(
   tat,
   aes(
-    x = DATE_SAMPLE_COLLECTION,
-    y = tat_total
+    x = DATE_DFAT,
+    y = tat_dfat_seq
   )
 ) +
   geom_point(aes(col=run_name),
@@ -501,28 +509,28 @@ tat_panel <- ggplot(
     col="black"
   )+
   labs(
-    x = "Sample collection date",
-    y = "Sample-to-sequence TAT (days)"
+    x = "Date",
+    y = "Turnaround time (days)"
   ) +
   guides(colour = "none")+
   theme_classic(base_size = 14); tat_panel
 
 tat_quarterly <- tat %>%
   mutate(
-    quarter = floor_date(DATE_SAMPLE_COLLECTION, "quarter")
+    quarter = floor_date(DATE_DFAT, "quarter")
   ) %>%
   group_by(quarter) %>%
   summarise(
     n = n(),
-    median_TAT = median(tat_total, na.rm = TRUE),
-    q25 = quantile(tat_total, 0.25, na.rm = TRUE),
-    q75 = quantile(tat_total, 0.75, na.rm = TRUE),
+    median_TAT = median(tat_dfat_seq, na.rm = TRUE),
+    q25 = quantile(tat_dfat_seq, 0.25, na.rm = TRUE),
+    q75 = quantile(tat_dfat_seq, 0.75, na.rm = TRUE),
     .groups = "drop"
   )
 
 ggplot(
   tat,
-  aes(x = DATE_SAMPLE_COLLECTION, y = tat_total)
+  aes(x = DATE_DFAT, y = tat_dfat_seq)
 ) +
   geom_point(alpha = 0.3) +
   geom_line(

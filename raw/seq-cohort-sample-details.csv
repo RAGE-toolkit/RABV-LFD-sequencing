@@ -1,0 +1,32 @@
+﻿Cohort,Study ID,Sample ID,DFAT result,RDT result,Municipality,Province,Region,Host,Date_biting_incident,Date_animal_death,Date_sample_collection,Date_sample_received,Date_test
+1,S1,RADDL4B-25-046,positive,positive,San Agustin,Romblon,MIMAROPA,,,,,,
+1,S2,RADDL4B-25-023,positive,NA,San Agustin,Romblon,MIMAROPA,,,,,,
+1,S3,Z-25-053,positive,NA,Silang,Cavite,Calabarzon,,,,,,
+1,S4,Z-25-058,positive,NA,Cavite City,Cavite,Calabarzon,,,,,,
+1,S5,Z-25-061,positive,NA,Cavite City,Cavite,Calabarzon,,,,,,
+1,S6-NEC,RADDL4B-25-048,negative,NA,,,,,,,,,
+2,N1,Z-25-015,positive,NA,Quezon City,Metro Manila,NCR,,,,,,
+2,N2,Z-25-038,positive,NA,Sta Rosa,Laguna,Calabarzon,,,,,,
+2,N3,Z-26-007,positive,NA,Biñan City,Laguna,Calabarzon,,,,,,
+2,N4,Z-26-009,positive,NA,Cavite City ,Cavite,Calabarzon,,,,,,
+2,N5,Z-26-012,positive,NA,Las Piñas City,Metro Manila,NCR,,,,,,
+2,N6,Z-26-017,positive,NA,Cavite City,Cavite,Calabarzon,,,,,,
+2,N7,Z-26-021,positive,NA,Cavite City,Cavite,Calabarzon,,,,,,
+2,N8,Z-26-023,positive,NA,Cavite City,Cavite,Calabarzon,,,,,,
+2,N9,Z-25-024,positive,NA,Las Piñas City,Metro Manila,NCR,,,,,,
+2,N10,Z-26-025,positive,NA,Calamba City,Laguna,Calabarzon,,,,,,
+2,N11,Z-26-031,positive,NA,Muntinlupa City,Metro Manila,NCR,,,,,,
+2,N12,Z-26-032,positive,NA,Muntinlupa City,Metro Manila,NCR,,,,,,
+2,N13,Z-26-035,positive,NA,Dasmariñas City,Cavite,MIMAROPA,,,,,,
+2,N14,RADDL4B-26-001,positive,NA,San Jose,Occidental Mindoro,MIMAROPA,,,,,,
+2,N15,RADDL4B-26-005,positive,NA,Magsaysay,Occidental Mindoro,MIMAROPA,,,,,,
+2,N16-NEC,RADDL4B-25-056,negative,negative,,,,,,,,,
+3,OM-135,RADDL4B-26-016,positive,positive,Roxas,Oriental Mindoro,MIMAROPA,Dog,19-May-26,21-May-26,21-May-26,,21-May-26
+3,OM-136,RADDL4B-26-017,positive,positive,Pinamalayan,Oriental Mindoro,MIMAROPA,Dog,17-Jun-26,17-Jun-26,17-Jun-26,,17-Jun-26
+3,OC-023,RADDL4B-26-019,positive,positive,Rizal,Occidental Mindoro,MIMAROPA,Dog,26-Jun-26,29-Jun-26,29-Jun-26,,2-Jul-26
+3,OC-025,RADDL4B-26-021,positive,positive,Rizal,Occidental Mindoro,MIMAROPA,Dog,7-Jul-26,8-Jul-26,8-Jul-26,,8-Jul-26
+3,OM-138,RADDL4B-26-022,positive,positive,Pinamalayan,Oriental Mindoro,MIMAROPA,Dog,30-Jul-26,2-Aug-26,4-Aug-26,,5-Aug-26
+3,OC-027,RADDL4B-26-024,positive,positive,San Jose,Occidental Mindoro,MIMAROPA,Dog,NA,10-Jul-26,10-Jul-26,,14-Jul-26
+3,OC-028,RADDL4B-26-025,positive,positive,Rizal,Occidental Mindoro,MIMAROPA,Dog,NA,15-Jul-26,16-Jul-26,,17-Jul-26
+3,OC-030,RADDL4B-26-027,positive,positive,Rizal,Occidental Mindoro,MIMAROPA,Dog,30-Jul-26,30-Jul-26,30-Jul-26,,5-Aug-26
+,,,,,,,,,,,,,

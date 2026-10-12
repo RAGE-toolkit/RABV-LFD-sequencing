@@ -139,7 +139,7 @@ model <- lmer(
 
 # Full model summary
 summary(model)
-
+anova(model)
 # sample explains ~84% of variance
 
 #check residuals
@@ -147,6 +147,8 @@ par(mfrow=c(2,2))
 plot(model)
 qqnorm(residuals(model))
 qqline(residuals(model))
+
+# dharma diagnostics
 
 #bit bimodal for medium (more well preserved for FTA so less of a change)
 ggplot(analysis_df, aes(Delta_Cq, fill = Medium)) +

@@ -12,7 +12,7 @@ library(tidyverse)
 genome_length <- 11923
 
 qc_all <- read.csv(
-  "raw/5aug26_FTA_RDT_study_seq_data - Summary (1).csv"
+  "raw/"
 ) %>%
   filter(!grepl("NTC|NEC", sample_id)) %>%
   select(-sequences) %>%

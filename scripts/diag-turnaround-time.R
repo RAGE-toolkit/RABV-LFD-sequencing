@@ -6,7 +6,7 @@ library(tidyverse)
 library(lubridate)
 
 
-epi <- read_csv("raw/26aug26_MIMAROPA outbreak 2022-2026 - ANIMAL.csv",  skip = 1)
+epi <- read_csv("processed/RDT_validation_cases.csv")
 gen <- read_csv("raw/26aug26_Genomic_surveillance_R4B_sequencing_data - Clean_sequence_data.csv", show_col_types = FALSE)
 names(epi); names(gen)
 
@@ -29,43 +29,8 @@ gen <- gen %>%
 
 # Combine datsets based on case id
 combined <- epi %>%
-  left_join(gen, by = c("CASE_NO" = "case_number"))
+  left_join(gen, by = c("case_no" = "case_number"))
 dim(combined)
-
-# Limit to just cases with RDT and DFAT tests
-combined <- combined %>%
-  filter(
-    # RDT result
-    (
-      TESTS_PVO %in% c("RDT+", "RDT-") |
-        TESTS_RADDL_RDT %in% c("RDT+", "RDT-") |
-        TESTS_MAO %in% c("RDT+", "RDT-") 
-    ) &
-      
-      # dFAT result
-      # dFAT/FAT result
-      (
-        TESTS_RADDL_dFAT %in% c("dFAT+", "dFAT-", "FAT+", "FAT-") |
-          TESTS_RITM_dFAT %in% c("dFAT+", "dFAT-", "FAT+", "FAT-")
-      )
-  )
-
-dim(combined)
-
-# Then remove the dfat unfit cases
-combined <- combined %>%
-  filter(!str_detect(LAB_RESULT_COPY, "unfit"))
-
-dim(combined)
-
-write.csv(combined,"processed/diagnostic-validation-cases_v3.csv", row.names=F)
-
-## SHOULD BE 320 - only getting 318
-
-# need to remove OM-134 as lab dates are incorrect
-combined <- combined %>%
-  filter(!CASE_NO == "OM-134")
-# 317
 
 
 #--------------------------------------------------
@@ -82,44 +47,44 @@ combined <- combined %>%
 
 tat <- combined %>%
   mutate(
-    DATE_SAMPLE_COLLECTION = as.Date(DATE_SAMPLE_COLLECTION, format = "%m/%d/%y"),
-    DATE_TESTS_PVO = as.Date(DATE_TESTS_PVO, format = "%m/%d/%y"),
-    DATE_TESTS_MAO = as.Date(DATE_TESTS_MAO, format = "%m/%d/%y"),
-    DATE_LAB_SUBMISSION_FORM = as.Date(DATE_LAB_SUBMISSION_FORM, format = "%m/%d/%y"),
-    DATE_TESTS_SPEEDIER = as.Date(DATE_TESTS_SPEEDIER, format = "%m/%d/%y"),
-    DATE_TESTS_RADDL = as.Date(DATE_TESTS_RADDL, format = "%m/%d/%y"),
-    DATE_TESTS_RITM = as.Date(DATE_TESTS_RITM, format = "%m/%d/%y"),
+    date_sample_collection = as.Date(date_sample_collection, format = "%m/%d/%y"),
+    date_tests_pvo= as.Date(date_tests_pvo, format = "%m/%d/%y"),
+    date_tests_mao = as.Date(date_tests_mao, format = "%m/%d/%y"),
+    date_lab_submission_form = as.Date(date_lab_submission_form, format = "%m/%d/%y"),
+    date_tests_speedier = as.Date(date_tests_speedier, format = "%m/%d/%y"),
+    Date_test_RADDL = as.Date(Date_test_RADDL, format = "%m/%d/%y"),
+    date_tests_ritm = as.Date(date_tests_ritm, format = "%m/%d/%y"),
     Date_sequenced = as.Date(Date_sequenced, format = "%d-%b-%y")
   ) %>%
   mutate(
-    DATE_RDT = pmin(
+    date_rdt = pmin(
       if_else(
-        TESTS_PVO %in% c("RDT+", "RDT-"),
-        DATE_TESTS_PVO,
+        tests_pvo %in% c("RDT+", "RDT-"),
+        date_tests_pvo,
         as.Date(NA)
       ),
       if_else(
-        TESTS_MAO %in% c("RDT+", "RDT-"),
-        DATE_TESTS_MAO,
+        tests_mao %in% c("RDT+", "RDT-"),
+        date_tests_mao,
         as.Date(NA)
       ),
       if_else(
-        TESTS_RADDL_RDT %in% c("RDT+", "RDT-"),
-        DATE_TESTS_RADDL,
+        tests_raddl_rdt %in% c("RDT+", "RDT-"),
+        date_tests_raddl,
         as.Date(NA)
       ),
       na.rm = TRUE
     ),
     
-    DATE_DFAT = pmin(
+    date_dfat = pmin(
       if_else(
-        TESTS_RADDL_dFAT %in% c("dFAT+", "dFAT-"),
-        DATE_TESTS_RADDL,
+        tests_raddl_d_fat %in% c("dFAT+", "dFAT-"),
+        date_tests_raddl,
         as.Date(NA)
       ),
       if_else(
-        TESTS_RITM_dFAT %in% c("dFAT+", "dFAT-"),
-        DATE_TESTS_RITM,
+        tests_ritm_d_fat %in% c("dFAT+", "dFAT-"),
+        date_tests_ritm,
         as.Date(NA)
       ),
       na.rm = TRUE
@@ -134,21 +99,21 @@ tat <- combined %>%
 tat <- tat %>%
   mutate(
     tat_collection_rdt =
-      as.numeric(DATE_RDT - DATE_SAMPLE_COLLECTION),
+      as.numeric(date_rdt - date_sample_collection),
     tat_rdt_dfat =
-      as.numeric(  DATE_DFAT  - DATE_RDT),
+      as.numeric(  date_dfat  - date_rdt),
   )
 #--------------------------------------------------
 # TAT data in long format
 #--------------------------------------------------
 tat_long <- tat %>%
   select(
-    CASE_NO,
+    case_no,
     tat_collection_rdt,
     tat_rdt_dfat
   ) %>%
   pivot_longer(
-    cols = -CASE_NO,
+    cols = -case_no,
     names_to = "stage",
     values_to = "days"
   ) %>%
@@ -177,13 +142,13 @@ tat_long$days[which(tat_long$days<0)]=0
 
 timeline <- tat %>%
   select(
-    CASE_NO,
-    DATE_SAMPLE_COLLECTION,
-    DATE_RDT,
-    DATE_DFAT
+    case_no,
+    date_sample_collection,
+    date_rdt,
+    date_dfat
   ) %>%
   pivot_longer(
-    cols = -CASE_NO,
+    cols = -case_no,
     names_to = "stage",
     values_to = "date"
   ) %>%
@@ -192,9 +157,9 @@ timeline <- tat %>%
     stage = factor(
       stage,
       levels = c(
-        "DATE_SAMPLE_COLLECTION",
-        "DATE_RDT",
-        "DATE_DFAT"
+        "date_sample_collection",
+        "date_rdt",
+        "date_dfat"
       ),
       labels = c(
         "Sample collected",
@@ -209,26 +174,26 @@ timeline <- tat %>%
 
 # first order by collection dates
 timeline <- timeline %>%
-  group_by(CASE_NO) %>%
+  group_by(case_no) %>%
   mutate(
     collection_date = min(date, na.rm = TRUE)
   ) %>%
   ungroup() %>%
   mutate(
-    CASE_NO = reorder(CASE_NO, collection_date)
+    case_no = reorder(case_no, collection_date)
   )
 
-# 512 samples with sequence data:
-nrow(timeline)
-# 1753 stages recorded
 
-n_distinct(timeline$CASE_NO)
-# over 512 unique samples
+nrow(timeline)
+# 933 stages recorded
+
+n_distinct(timeline$case_no)
+# 319 unique samples
 
 # then plot
 ggplot(
   timeline,
-  aes(x = date, y = CASE_NO, group = CASE_NO)
+  aes(x = date, y = case_no, group = case_no)
 ) +
   geom_line(alpha = 0.3) +
   geom_point(aes(shape = stage, col = stage), size = 1) +

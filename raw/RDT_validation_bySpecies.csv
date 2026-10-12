@@ -1,0 +1,8 @@
+﻿Animal Species,False Negative,True Negative,True Positive,Total per Species
+Bovine (Cow),,1,2,3
+Canine (Dog),1,76,199,276
+Caprine (Goat),,1,2,3
+Feline (Cat),,27,1,28
+Ovine (Sheep),,1,1,2
+Porcine (Pig),1,1,5,7
+Total per Test Result,2,107,210,319
