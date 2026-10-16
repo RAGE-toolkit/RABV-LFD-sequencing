@@ -11,6 +11,7 @@ library(glmmTMB)
 library(wesanderson)
 library(cowplot)
 library(dplyr)
+library(ggplot2)
 
 #==================================================
 # Prepare sequencing data
@@ -711,17 +712,16 @@ exp(0.766)
 exp(0.649)
 exp(0.762)
 
-library(emmeans)
 
 # Specimen type at each timepoint: OR FTA:RDT, plus back-transformed means
 emm_type <- emmeans(model_beta_2way, ~ sample_type | timepoint)
 summary(emm_type, type = "response")                # mean coverage (proportion) with 95% CI
-summary(pairs(emm_type), type = "response", infer = TRUE)   # FTA - RDT -> OR FTA:RDT, 95% CI
+summary(pairs(emm_type), type = "response", infer = TRUE)   # FTA - RDT , OR FTA:RDT, 95% CI
 
 # Temperature at each timepoint
 emm_temp <- emmeans(model_beta_2way, ~ temp | timepoint)
-summary(pairs(emm_temp), type = "response", infer = TRUE)                    # RT - 37 -> OR RT:37
-summary(pairs(emm_temp, reverse = TRUE), type = "response", infer = TRUE)    # 37 - RT -> OR 37:RT
+summary(pairs(emm_temp), type = "response", infer = TRUE)                    # RT - 37 , OR RT:37
+summary(pairs(emm_temp, reverse = TRUE), type = "response", infer = TRUE)    # 37 - RT , OR 37:RT
 #==================================================
 # 5. Save processed data
 #==================================================
@@ -731,36 +731,7 @@ summary(pairs(emm_temp, reverse = TRUE), type = "response", infer = TRUE)    # 3
 # 6. Save ANOVA-style output for the interaction test, for reporting
 #==================================================
 # anova_res <- anova(model_beta_2way, model_beta)
-# write.csv(as.data.frame(anova_res), "figures/coverage20_beta_model_anova.csv",row.names = TRUE)
-
-
-emm <- emmeans(model_beta_2way, ~ sample_type * temp * timepoint)
-emm_df <- as.data.frame(emm)
-emm_df$prob <- plogis(emm_df$emmean)
-
-ggplot(emm_df, aes(x = timepoint, y = prob, color = temp, linetype = sample_type, group = interaction(temp, sample_type))) +
-  geom_line() + geom_point() +
-  labs(y = "Predicted coverage proportion (>=20x)", x = "Day")
-
-ggplot(emm_df,
-       aes(x = timepoint,
-           y = prob * 100,
-           color = temp,
-           linetype = sample_type,
-           group = interaction(temp, sample_type))) +
-  geom_line(linewidth = 0.8) +
-  geom_point(size = 2) +
-  scale_y_continuous(
-    limits = c(75, 100),
-    labels = function(x) paste0(x, "%")
-  ) +
-  labs(
-    x = "Storage time (days)",
-    y = "Predicted genome coverage ≥20%",
-    color = "Temperature",
-    linetype = "Sample type"
-  ) +
-  theme_classic()
+# write.csv(as.data.frame(anova_res), "tables/coverage20_beta_model_anova.csv",row.names = TRUE)
 
 
 #### PLOTS to showcase coverage 
@@ -1102,26 +1073,26 @@ p <- plot_grid(
   heatmap,
   ncol = 1,
   rel_heights = c(0.05, 1)
-)
+);p
 
-ggsave(
-  "figures/genome_coverage_heatmap.tiff",
-  plot = p,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw"
-)
-
-ggsave(
-  "figures/genome_coverage_heatmap.png",
-  plot = p,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600
-)
+# ggsave(
+#   "figures/genome_coverage_heatmap.tiff",
+#   plot = p,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw"
+# )
+# 
+# ggsave(
+#   "figures/genome_coverage_heatmap.png",
+#   plot = p,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600
+# )
 
 
 # trajectory plots- lines over time
@@ -1207,13 +1178,6 @@ trajectory_data <- bind_rows(
     )
   )
 
-
-# col palette
-pal <- wes_palette("Zissou1", 5, type = "discrete")
-
-pal
-fta_col <- pal[1]
-rdt_col <- pal[4]
 
 panel_labels <- data.frame(
   sample_type = c("RDT", "RDT", "FTA", "FTA"),
@@ -1352,24 +1316,24 @@ p <- ggplot(
 
 p
 
-ggsave(
-  "figures/genome_coverage_trajectories_cohort1.tiff",
-  plot = p,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw"
-)
-
-ggsave(
-  "figures/genome_coverage_trajectories_cohort1.png",
-  plot = p,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600
-)
+# ggsave(
+#   "figures/genome_coverage_trajectories_cohort1.tiff",
+#   plot = p,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw"
+# )
+# 
+# ggsave(
+#   "figures/genome_coverage_trajectories_cohort1.png",
+#   plot = p,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600
+# )
 
 
 # cohrot 2 and 3 
@@ -1474,21 +1438,21 @@ p_validation <- ggplot(
     )
 
 p_validation
-ggsave(
-  "figures/genome_coverage_validation.png",
-  plot = p_validation,
-  width = 180,
-  height = 100,
-  units = "mm",
-  dpi = 600
-)
-
-ggsave(
-  "figures/genome_coverage_validation.tiff",
-  plot = p_validation,
-  width = 180,
-  height = 100,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw"
-)
+# ggsave(
+#   "figures/genome_coverage_validation.png",
+#   plot = p_validation,
+#   width = 180,
+#   height = 100,
+#   units = "mm",
+#   dpi = 600
+# )
+# 
+# ggsave(
+#   "figures/genome_coverage_validation.tiff",
+#   plot = p_validation,
+#   width = 180,
+#   height = 100,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw"
+# )

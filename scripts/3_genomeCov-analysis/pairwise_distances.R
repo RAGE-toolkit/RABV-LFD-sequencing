@@ -356,10 +356,10 @@ if (
 # 10. Save pairwise dataset
 # ============================================================
 
-write_csv(
-  distances_with_metadata,
-  "processed/within_sample_pairwise_differences_with_metadata.csv"
-)
+# write_csv(
+#   distances_with_metadata,
+#   "processed/within_sample_pairwise_differences_with_metadata.csv"
+# )
 
 
 # ============================================================
@@ -502,32 +502,32 @@ p_pairwise <- ggplot(
   )
 
 p_pairwise
-ggsave(
-  "figures/pairwise_nucleotide_differences.pdf",
-  plot = p_pairwise,
-  width = 180,
-  height = 120,
-  units = "mm",
-  device = cairo_pdf
-)
-ggsave(
-  "figures/pairwise_nucleotide_differences.tiff",
-  plot = p_pairwise,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw"
-)
-ggsave(
-  "pairwise_nucleotide_differences.png",
-  plot = p_pairwise,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
+# ggsave(
+#   "figures/pairwise_nucleotide_differences.pdf",
+#   plot = p_pairwise,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   device = cairo_pdf
+# )
+# ggsave(
+#   "figures/pairwise_nucleotide_differences.tiff",
+#   plot = p_pairwise,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw"
+# )
+# ggsave(
+#   "pairwise_nucleotide_differences.png",
+#   plot = p_pairwise,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
 
 # ============================================================
 # 15. Distance vs minimum genome coverage

@@ -35,6 +35,39 @@ Genome coverage was analysed using beta mixed-effects regression, with biologica
 - Genome coverage declined with storage duration, with lower coverage at 37°C than ambient temperature at days 7 and 21.
 - Consensus sequences from matched field-collected LFDs and brain specimens were identical in seven of eight pairs.
 
+## Scripts   
+### 1_data-prep
+Collate and standardise seq and cq data into dataframes suitable for analyses
+R scripts: 
+- prepare_sequencing_stats.R : combines sequencing summary statistics (read depth etc) for all cohorts, removes 1 failed sample (S1-FTA-RT-D1), non-study samples and negatives. Standardises temp and storage info for all specimen types.
+- prepare_cq_data.R : run after above script to standardise data and add cq values to the sequencing info
+Python scripts:
+- combine_amplicon_depths.py : used to collate all the amplicon depth files ("*.amplicon_depths.tsv") from bioinformatics pipeline output into one file for analysis
+- combine_seq_depths.py : used to collate all the post normalisation (i.e. capped to 200x) per base depth files   
+
+### 2_cq-analysis  
+Analysis of change in real-time qPCR cq values from baseline brain measurement
+- stats-qc.R : calculate delta_cq (change in cq from baseline) and apply lmer model to measure effect of specimen type, temp and storage duration
+- cqVcoverage.R : plot cq values versus genome coverage
+
+### 3_genomeCov-analysis   
+Analysis of genome coverage (at read depth of 20x) in response to temp, storage duration and specimen type
+Python script:
+- compare_sample_specimens.py : compares same-sample specimens to identify SNPs relative to baseline brain sample, using n160 alignment as input. Produces comparison_to_baseline.csv and snp_positions_to_baseline.csv
+R scripts:   
+- stats-seq.R : summaries of samples achieving >20x, range of exploratory and final plots, beta regression mixed model to assess proportion of genome covered in relation to temp, storage duration and specimen type
+- all_experiments_plots.R : more plots, including main manuscript figures
+- compare-seqDepth-coverage.R : summarise and plot read depth across genome for each cohort and produce plot, including cumulative snp frequency across genome
+- amplicons_versus_snps.R : lollipop plots of SNP frequencies across the genome, with amplicons mapped
+- compare-amplicon-coverage.R : explore amplicons failures across cohorts and by specimen type
+- pairwise_distances.R : calculate pairwise SNP differences for the n160 sequences used in study, outputs within sample distance heatmaps and exploratory plots to look at associations with exp variables
+
+### 4_genomeCov-analysis   
+Calculating turnaround times for diagnostic workflows (n=319 RDT samples) and sequencing workflows in MIMAROPA, Philippines
+- diag-turnaround-time.R : calculates TAT for LFD and FAT diagnostic results fro samples processed in RDT validation in MIMAROPA
+- seq-turnaround-times.R : calculate TAT from point of confirmatory FAT test for sequenced samples from SPEEDIER project
+
+
 ## Tools and protocols
 
 - **Sequencing pipeline:** [Artic-nf](https://github.com/RAGE-toolkit/Artic-nf)

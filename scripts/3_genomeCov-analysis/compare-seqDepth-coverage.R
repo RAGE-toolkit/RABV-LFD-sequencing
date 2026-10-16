@@ -1,5 +1,5 @@
 library(tidyverse)
-
+library(patchwork)
 # =========================================================
 # Read the combined sequencing depth output from Python
 # =========================================================
@@ -473,7 +473,6 @@ ggplot(
   
   theme_classic()
 
-library(patchwork)
 
 condition_cols <- c(
   "Brain" = "black",
@@ -643,7 +642,7 @@ p_cohort3 <- ggplot(
   ) +
   theme_classic(base_size = 12) 
 
-source("scripts/amplicons_versus_snps.R")
+source("scripts/3_genomeCov-analysis/amplicons_versus_snps.R")
 
 p_snp_add <- p_snp_add+scale_x_continuous(
   limits = x_limits,
@@ -668,34 +667,34 @@ p_depth_combined
 
 # Publication-quality outputs
 
-ggsave(
-  "figures/genome_depth_by_cohort.pdf",
-  plot = p_depth_combined,
-  width = 180,
-  height = 150,
-  units = "mm",
-  device = cairo_pdf,
-  bg = "white"
-)
-
-ggsave(
-  "figures/genome_depth_by_cohort.tiff",
-  plot = p_depth_combined,
-  width = 180,
-  height = 150,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw",
-  bg = "white"
-)
-
-ggsave(
-  "figures/genome_depth_by_cohort.png",
-  plot = p_depth_combined,
-  width = 180,
-  height = 150,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
+# ggsave(
+#   "figures/genome_depth_by_cohort.pdf",
+#   plot = p_depth_combined,
+#   width = 180,
+#   height = 150,
+#   units = "mm",
+#   device = cairo_pdf,
+#   bg = "white"
+# )
+# 
+# ggsave(
+#   "figures/genome_depth_by_cohort.tiff",
+#   plot = p_depth_combined,
+#   width = 180,
+#   height = 150,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw",
+#   bg = "white"
+# )
+# 
+# ggsave(
+#   "figures/genome_depth_by_cohort.png",
+#   plot = p_depth_combined,
+#   width = 180,
+#   height = 150,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
 

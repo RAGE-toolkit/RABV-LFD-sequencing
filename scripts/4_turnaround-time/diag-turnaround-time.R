@@ -247,3 +247,4 @@ ggplot(tat_long, aes(x = stage, y = days)) +
     y = "Turnaround time (days)"
   ) +
   theme_classic()
+

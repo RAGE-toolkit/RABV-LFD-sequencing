@@ -365,24 +365,24 @@ p_amplicon_failure <- p_amplicon_failure  +
   ); p_amplicon_failure 
 
 
-ggsave(
-  "figures/amplicon_failure.pdf",
-  plot = p_amplicon_failure,
-  width = 180,
-  height = 120,
-  units = "mm",
-  device = cairo_pdf
-)
-
-ggsave(
-  "figures/amplicon_failure.png",
-  plot = p_amplicon_failure,
-  width = 180,
-  height = 120,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
+# ggsave(
+#   "figures/amplicon_failure.pdf",
+#   plot = p_amplicon_failure,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   device = cairo_pdf
+# )
+# 
+# ggsave(
+#   "figures/amplicon_failure.png",
+#   plot = p_amplicon_failure,
+#   width = 180,
+#   height = 120,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
 
 # proportion of >20 versus <20 coverage per amplicon
 
@@ -633,27 +633,27 @@ p <- ggplot(
   );p
 
 # PNG — 600 dpi
-ggsave(
-  "figures/amplicon_failure_over_time.png",
-  plot = p,
-  width = 180,
-  height = 140,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
-
-# TIFF — 600 dpi, LZW compressed
-ggsave(
-  "figures/amplicon_failure_over_time.tiff",
-  plot = p,
-  width = 180,
-  height = 140,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw",
-  bg = "white"
-)
+# ggsave(
+#   "figures/amplicon_failure_over_time.png",
+#   plot = p,
+#   width = 180,
+#   height = 140,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
+# 
+# # TIFF — 600 dpi, LZW compressed
+# ggsave(
+#   "figures/amplicon_failure_over_time.tiff",
+#   plot = p,
+#   width = 180,
+#   height = 140,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw",
+#   bg = "white"
+# )
 
 
 # overall amplicon failure
@@ -716,24 +716,24 @@ p2 <- ggplot(
 p2
 
 # PNG — 600 dpi
-ggsave(
-  "figures/summary_amplicon_failure_over_time.png",
-  plot = p2,
-  width = 180,
-  height = 140,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
-
-# TIFF — 600 dpi, LZW compressed
-ggsave(
-  "figures/summary_amplicon_failure_over_time.tiff",
-  plot = p2,
-  width = 180,
-  height = 140,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw",
-  bg = "white"
-)
+# ggsave(
+#   "figures/summary_amplicon_failure_over_time.png",
+#   plot = p2,
+#   width = 180,
+#   height = 140,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
+# 
+# # TIFF — 600 dpi, LZW compressed
+# ggsave(
+#   "figures/summary_amplicon_failure_over_time.tiff",
+#   plot = p2,
+#   width = 180,
+#   height = 140,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw",
+#   bg = "white"
+# )

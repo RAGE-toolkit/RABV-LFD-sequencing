@@ -1,3 +1,5 @@
+
+library(tidyverse)
 ## Plot of SNP positions and amplicon posisitons
 
 snps <- read.csv("processed/snp_positions_to_baseline.csv")
@@ -132,39 +134,39 @@ p_snp_amplicons <- p_snp_amplicons +
     axis.text = element_text(size = 13)
   ); p_snp_amplicons
 
-# PNG
-ggsave(
-  "figures/snp_amplicon_plot.png",
-  plot = p_snp_amplicons,
-  width = 180,
-  height = 110,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
-
-# PDF
-ggsave(
-  "figures/snp_amplicon_plot.pdf",
-  plot = p_snp_amplicons,
-  width = 180,
-  height = 110,
-  units = "mm",
-  device = cairo_pdf,
-  bg = "white"
-)
-
-# TIFF
-ggsave(
-  "figures/snp_amplicon_plot.tiff",
-  plot = p_snp_amplicons,
-  width = 180,
-  height = 110,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw",
-  bg = "white"
-)
+# # PNG
+# ggsave(
+#   "figures/snp_amplicon_plot.png",
+#   plot = p_snp_amplicons,
+#   width = 180,
+#   height = 110,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
+# 
+# # PDF
+# ggsave(
+#   "figures/snp_amplicon_plot.pdf",
+#   plot = p_snp_amplicons,
+#   width = 180,
+#   height = 110,
+#   units = "mm",
+#   device = cairo_pdf,
+#   bg = "white"
+# )
+# 
+# # TIFF
+# ggsave(
+#   "figures/snp_amplicon_plot.tiff",
+#   plot = p_snp_amplicons,
+#   width = 180,
+#   height = 110,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw",
+#   bg = "white"
+# )
 
 # Publication-ready plot
 p_snp_amplicons <- p_snp_amplicons +
@@ -173,8 +175,6 @@ p_snp_amplicons <- p_snp_amplicons +
     axis.text = element_text(size = 13)
   ); p_snp_amplicons
  
-
-
 
 p_snp <- ggplot() +
   
@@ -250,35 +250,35 @@ p_snp <- p_snp +
 p_snp_add <- p_snp +  theme_classic(base_size = 12)
 
 # PNG
-ggsave(
-  "figures/snp_plot.png",
-  plot = p_snp,
-  width = 180,
-  height = 110,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
-
-# PDF
-ggsave(
-  "figures/snp_plot.pdf",
-  plot = p_snp,
-  width = 180,
-  height = 110,
-  units = "mm",
-  device = cairo_pdf,
-  bg = "white"
-)
-
-# TIFF
-ggsave(
-  "figures/snp_plot.tiff",
-  plot = p_snp,
-  width = 180,
-  height = 110,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw",
-  bg = "white"
-)
+# ggsave(
+#   "figures/snp_plot.png",
+#   plot = p_snp,
+#   width = 180,
+#   height = 110,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
+# 
+# # PDF
+# ggsave(
+#   "figures/snp_plot.pdf",
+#   plot = p_snp,
+#   width = 180,
+#   height = 110,
+#   units = "mm",
+#   device = cairo_pdf,
+#   bg = "white"
+# )
+# 
+# # TIFF
+# ggsave(
+#   "figures/snp_plot.tiff",
+#   plot = p_snp,
+#   width = 180,
+#   height = 110,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw",
+#   bg = "white"
+# )

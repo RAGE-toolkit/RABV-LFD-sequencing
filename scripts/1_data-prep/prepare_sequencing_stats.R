@@ -88,13 +88,13 @@ qc_lab <- qc_raw %>%
   ) %>%
   mutate(
     
-    # Brain samples: N6-D0
+    # Brain samples: eg N6-D0
     sample_type = case_when(
       sample_type == "D0" ~ "Brain",
       TRUE ~ sample_type
     ),
     
-    # Experiment 2: N6-FTA-D3
+    # Experiment 2: eg N6-FTA-D3
     timepoint_from_temp = as.numeric(
       ifelse(
         grepl("^D", temp),

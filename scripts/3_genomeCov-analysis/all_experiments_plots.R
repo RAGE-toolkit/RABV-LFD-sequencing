@@ -35,7 +35,7 @@ recovery_summary_all <- qc_all %>%
 
 # write.csv(
 #   recovery_summary_all,
-#   "figures/all_experiments_genome_recovery_summary.csv",
+#   "tables/all_experiments_genome_recovery_summary.csv",
 #   row.names = FALSE
 # )
 
@@ -99,14 +99,14 @@ p_all_experiments <- ggplot(
 p_all_experiments
 
 
-ggsave(
-  "figures/all_experiments_genome_recovery_coverage20.pdf",
-  p_all_experiments,
-  width = 16.5,
-  height = 14,
-  units = "cm",
-  device = cairo_pdf
-)
+# ggsave(
+#   "figures/all_experiments_genome_recovery_coverage20.pdf",
+#   p_all_experiments,
+#   width = 16.5,
+#   height = 14,
+#   units = "cm",
+#   device = cairo_pdf
+# )
 
 coverage_summary <- qc_all %>%
   filter(sample_type != "Brain") %>%
@@ -206,14 +206,14 @@ p_all_experiments2 <- ggplot(
     )
   );p_all_experiments2
 
-ggsave(
-  "figures/all_experiments_mean&sd_genome_recovery_coverage20-nLabels.pdf",
-  p_all_experiments2,
-  width = 16.5,
-  height = 14,
-  units = "cm",
-  device = cairo_pdf
-)
+# ggsave(
+#   "figures/all_experiments_mean&sd_genome_recovery_coverage20-nLabels.pdf",
+#   p_all_experiments2,
+#   width = 16.5,
+#   height = 14,
+#   units = "cm",
+#   device = cairo_pdf
+# )
 
 
 ##have cohort 2 as validation points instead
@@ -441,23 +441,23 @@ p_all_experiments3_pub <- ggplot(
   )
 
 p_all_experiments3_pub
-ggsave(
-  "figures/p_all_experiments3_publication.pdf",
-  p_all_experiments3_pub,
-  width = 180,
-  height = 125,
-  units = "mm",
-  device = cairo_pdf
-)
-ggsave(
-  "figures/p_all_experiments3_publication.png",
-  p_all_experiments3_pub,
-  width = 180,
-  height = 125,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
+# ggsave(
+#   "figures/p_all_experiments3_publication.pdf",
+#   p_all_experiments3_pub,
+#   width = 180,
+#   height = 125,
+#   units = "mm",
+#   device = cairo_pdf
+# )
+# ggsave(
+#   "figures/p_all_experiments3_publication.png",
+#   p_all_experiments3_pub,
+#   width = 180,
+#   height = 125,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
 
 
 
@@ -1163,47 +1163,47 @@ p_coverage_success <- ggplot(
   )
 p_coverage_success
 
-# Publication-ready theme
-p_coverage_success_pub <- p_coverage_success +
-  theme(
-    axis.title = element_text(size = 16),
-    axis.text = element_text(size = 13),
-    strip.text = element_text(size = 15, face = "bold"),
-    legend.title = element_text(size = 14),
-    legend.text = element_text(size = 13)
-  )
-
-# PNG
-ggsave(
-  "figures/p_coverage_success.png",
-  plot = p_coverage_success_pub,
-  width = 180,
-  height = 100,
-  units = "mm",
-  dpi = 600,
-  bg = "white"
-)
-
-# PDF
-ggsave(
-  "figures/p_coverage_success.pdf",
-  plot = p_coverage_success_pub,
-  width = 180,
-  height = 100,
-  units = "mm",
-  device = cairo_pdf,
-  bg = "white"
-)
-
-# TIFF
-ggsave(
-  "figures/p_coverage_success.tiff",
-  plot = p_coverage_success_pub,
-  width = 180,
-  height = 100,
-  units = "mm",
-  dpi = 600,
-  compression = "lzw",
-  bg = "white"
-)
+# # Publication-ready theme
+# p_coverage_success_pub <- p_coverage_success +
+#   theme(
+#     axis.title = element_text(size = 16),
+#     axis.text = element_text(size = 13),
+#     strip.text = element_text(size = 15, face = "bold"),
+#     legend.title = element_text(size = 14),
+#     legend.text = element_text(size = 13)
+#   )
+# 
+# # PNG
+# ggsave(
+#   "figures/p_coverage_success.png",
+#   plot = p_coverage_success_pub,
+#   width = 180,
+#   height = 100,
+#   units = "mm",
+#   dpi = 600,
+#   bg = "white"
+# )
+# 
+# # PDF
+# ggsave(
+#   "figures/p_coverage_success.pdf",
+#   plot = p_coverage_success_pub,
+#   width = 180,
+#   height = 100,
+#   units = "mm",
+#   device = cairo_pdf,
+#   bg = "white"
+# )
+# 
+# # TIFF
+# ggsave(
+#   "figures/p_coverage_success.tiff",
+#   plot = p_coverage_success_pub,
+#   width = 180,
+#   height = 100,
+#   units = "mm",
+#   dpi = 600,
+#   compression = "lzw",
+#   bg = "white"
+# )
 
