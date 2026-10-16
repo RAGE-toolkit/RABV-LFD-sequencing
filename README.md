@@ -80,7 +80,7 @@ Calculating turnaround times for diagnostic workflows (n=319 RDT samples) and se
 ## Citation
 Please cite the archived version of this repository:
 Brunker K, et al. (2026). *RABV-LFD-sequencing* (Version 1.0.0).
-Zenodo. https://doi.org/YOUR-DOI
+Zenodo. DOI: 10.5281/zenodo.23418127
 
 Preprint: Lateral flow devices can fast-track rabies virus genomic surveillance
 Bea Crisostomo, Criselda Bautista, Mary Elizabeth Miranda, Daria L. Manalo, Shynie Vee M. Telmo, Gian Rei Mangcucang, Sheryl Pablo, Michael Ralph Tanedo, Eleanor M. Rees, Sandeep Kasaragod, Nai Rui Chng, Katie Hampson, Kirstyn Brunker
