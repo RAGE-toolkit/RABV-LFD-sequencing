@@ -76,8 +76,12 @@ Calculating turnaround times for diagnostic workflows (n=319 RDT samples) and se
 - **Rabies lineage assignment:** [MADDOG V2](https://github.com/RAGE-toolkit/MADDOG-V2)
 - **Laboratory protocol:** [RNA extraction from rapid diagnostic tests and FTA cards](https://doi.org/10.17504/protocols.io.14egn5oz6g5d/v1)
 
+
 ## Citation
+Please cite the archived version of this repository:
+Brunker K, et al. (2026). *RABV-LFD-sequencing* (Version 1.0.0).
+Zenodo. https://doi.org/YOUR-DOI
 
-*Lateral flow devices can fast-track rabies virus genomic surveillance.*
-
-Please cite the associated manuscript when using this repository.
+Preprint: Lateral flow devices can fast-track rabies virus genomic surveillance
+Bea Crisostomo, Criselda Bautista, Mary Elizabeth Miranda, Daria L. Manalo, Shynie Vee M. Telmo, Gian Rei Mangcucang, Sheryl Pablo, Michael Ralph Tanedo, Eleanor M. Rees, Sandeep Kasaragod, Nai Rui Chng, Katie Hampson, Kirstyn Brunker
+bioRxiv 2026.10.12.758520; doi: https://doi.org/10.64898/2026.10.12.758520
