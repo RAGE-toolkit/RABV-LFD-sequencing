@@ -2,6 +2,8 @@ library(tidyverse)
 library(lmerTest)
 library(emmeans)
 library(DHARMa)
+library(dplyr)
+library(tibble)
 
 
 seq_cq <- read.csv("processed/all-runs_sequencing_stats_prepared_withCq.csv")
@@ -154,19 +156,109 @@ ggplot(
   ) +
   theme_classic()
 
-ggsave(
-  filename = "figures/fig_Cq_vs_genome_coverage20_sampleType.tiff",
-  width = 16.5,
-  height = 9,
-  units = "cm",
-  dpi = 600,
-  compression = "lzw"
+# ggsave(
+#   filename = "figures/fig_Cq_vs_genome_coverage20_sampleType.tiff",
+#   width = 16.5,
+#   height = 9,
+#   units = "cm",
+#   dpi = 600,
+#   compression = "lzw"
+# )
+# 
+# ggsave(
+#   filename = "figures/fig_Cq_vs_genome_coverage20_sampleType.png",
+#   width = 16.5,
+#   height = 9,
+#   units = "cm",
+#   dpi = 600
+# )
+
+
+#### Extract results and export all - chatgpt code
+library(broom.mixed)
+library(writexl)
+
+
+model_coefficients <- broom.mixed::tidy(
+  model,
+  effects = "fixed",
+  conf.int = TRUE,
+  conf.level = 0.95
+) %>%
+  mutate(
+    estimate = round(estimate, 3),
+    std.error = round(std.error, 3),
+    conf.low = round(conf.low, 3),
+    conf.high = round(conf.high, 3),
+    p.value = signif(p.value, 3)
+  ) %>%
+  select(
+    term,
+    estimate,
+    std.error,
+    conf.low,
+    conf.high,
+    p.value
+  )
+
+model_coefficients
+
+#anova results 
+# Extract Type III ANOVA results
+anova_raw <- as.data.frame(anova(model, type = 3))
+
+# Inspect the actual column names
+names(anova_raw)
+
+# Convert to a manuscript-ready table
+anova_results <- anova_raw %>%
+  rownames_to_column("Term") %>%
+  rename_with(~ gsub("\\.", " ", .x)) %>%
+  rename_with(~ gsub("Pr\\(>F\\)", "p-value", .x)) %>%
+  mutate(
+    across(where(is.numeric), ~ round(.x, 3))
+  )
+
+anova_results
+
+# Estimated marginal means
+emm_sample_type <- as.data.frame(
+  emmeans(model, ~ sample_type)
 )
 
-ggsave(
-  filename = "figures/fig_Cq_vs_genome_coverage20_sampleType.png",
-  width = 16.5,
-  height = 9,
-  units = "cm",
-  dpi = 600
+emm_temp <- as.data.frame(
+  emmeans(model, ~ temp)
+)
+
+emm_timepoint <- as.data.frame(
+  emmeans(model, ~ timepoint)
+)
+
+# Pairwise comparisons
+pairs_sample_type <- as.data.frame(
+  pairs(emmeans(model, ~ sample_type), adjust = "tukey")
+)
+
+pairs_temp <- as.data.frame(
+  pairs(emmeans(model, ~ temp), adjust = "tukey")
+)
+
+pairs_timepoint <- as.data.frame(
+  pairs(emmeans(model, ~ timepoint), adjust = "tukey")
+)
+
+
+# this collects everyhting in an excel 
+write_xlsx(
+  list(
+    Fixed_effects = model_coefficients,
+    Type_III_ANOVA = anova_results,
+    EMM_Sample_type = emm_sample_type,
+    EMM_Temperature = emm_temp,
+    EMM_Timepoint = emm_timepoint,
+    Pairs_Sample_type = pairs_sample_type,
+    Pairs_Temperature = pairs_temp,
+    Pairs_Timepoint = pairs_timepoint
+  ),
+  path = "tables/Cq_model_results.xlsx"
 )

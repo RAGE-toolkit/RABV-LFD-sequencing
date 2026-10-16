@@ -12,7 +12,9 @@ library(wesanderson)
 library(cowplot)
 library(dplyr)
 library(ggplot2)
-
+library(tibble)
+library(writexl)
+library(car)
 #==================================================
 # Prepare sequencing data
 #==================================================

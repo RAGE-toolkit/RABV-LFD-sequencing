@@ -56,6 +56,7 @@ Python script:
 - compare_sample_specimens.py : compares same-sample specimens to identify SNPs relative to baseline brain sample, using n160 alignment as input. Produces comparison_to_baseline.csv and snp_positions_to_baseline.csv
 R scripts:   
 - stats-seq.R : summaries of samples achieving >20x, range of exploratory and final plots, beta regression mixed model to assess proportion of genome covered in relation to temp, storage duration and specimen type
+- create_model_results_table.R : export all model results to an excel
 - all_experiments_plots.R : more plots, including main manuscript figures
 - compare-seqDepth-coverage.R : summarise and plot read depth across genome for each cohort and produce plot, including cumulative snp frequency across genome
 - amplicons_versus_snps.R : lollipop plots of SNP frequencies across the genome, with amplicons mapped
