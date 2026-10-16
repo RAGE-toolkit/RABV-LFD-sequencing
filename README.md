@@ -48,6 +48,7 @@ Python scripts:
 ### 2_cq-analysis  
 Analysis of change in real-time qPCR cq values from baseline brain measurement
 - stats-qc.R : calculate delta_cq (change in cq from baseline) and apply lmer model to measure effect of specimen type, temp and storage duration
+- create_cqmodel_results_table.R : export all model results to an excel
 - cqVcoverage.R : plot cq values versus genome coverage
 
 ### 3_genomeCov-analysis   
