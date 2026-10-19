@@ -9,18 +9,6 @@ library(writexl)
 ###Export the model results for gen seq coverage analysis
 source("scripts/3_genomeCov-analysis/stats-seq.R")
 
-#### Export results for genome coverage analysis
-
-library(glmmTMB)
-library(emmeans)
-library(car)
-library(dplyr)
-library(tibble)
-library(writexl)
-
-# Collate and export model results
-source("scripts/3_genomeCov-analysis/stats-seq.R")
-
 
 # ============================================================
 # Type III Wald chi-square tests
@@ -30,7 +18,7 @@ anova_res <- car::Anova(model_beta_2way, type = "III")
 
 anova_table <- as.data.frame(anova_res) %>%
   rownames_to_column("Term") %>%
-  dplyr::dplyr::rename(
+  dplyr::rename(
     `Wald chi-square` = Chisq,
     `Degrees of freedom` = Df,
     `p-value` = `Pr(>Chisq)`

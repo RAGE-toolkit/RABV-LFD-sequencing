@@ -1163,47 +1163,47 @@ p_coverage_success <- ggplot(
   )
 p_coverage_success
 
-# # Publication-ready theme
-# p_coverage_success_pub <- p_coverage_success +
-#   theme(
-#     axis.title = element_text(size = 16),
-#     axis.text = element_text(size = 13),
-#     strip.text = element_text(size = 15, face = "bold"),
-#     legend.title = element_text(size = 14),
-#     legend.text = element_text(size = 13)
-#   )
-# 
-# # PNG
-# ggsave(
-#   "figures/p_coverage_success.png",
-#   plot = p_coverage_success_pub,
-#   width = 180,
-#   height = 100,
-#   units = "mm",
-#   dpi = 600,
-#   bg = "white"
-# )
-# 
-# # PDF
-# ggsave(
-#   "figures/p_coverage_success.pdf",
-#   plot = p_coverage_success_pub,
-#   width = 180,
-#   height = 100,
-#   units = "mm",
-#   device = cairo_pdf,
-#   bg = "white"
-# )
-# 
-# # TIFF
-# ggsave(
-#   "figures/p_coverage_success.tiff",
-#   plot = p_coverage_success_pub,
-#   width = 180,
-#   height = 100,
-#   units = "mm",
-#   dpi = 600,
-#   compression = "lzw",
-#   bg = "white"
-# )
+# Publication-ready theme
+p_coverage_success_pub <- p_coverage_success +
+  theme(
+    axis.title = element_text(size = 16),
+    axis.text = element_text(size = 13),
+    strip.text = element_text(size = 15, face = "bold"),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 13)
+  );p_coverage_success_pub
+
+# PNG
+ggsave(
+  "figures/p_coverage_success.png",
+  plot = p_coverage_success_pub,
+  width = 180,
+  height = 100,
+  units = "mm",
+  dpi = 600,
+  bg = "white"
+)
+
+# PDF
+ggsave(
+  "figures/p_coverage_success.pdf",
+  plot = p_coverage_success_pub,
+  width = 180,
+  height = 100,
+  units = "mm",
+  device = cairo_pdf,
+  bg = "white"
+)
+
+# TIFF
+ggsave(
+  "figures/p_coverage_success.tiff",
+  plot = p_coverage_success_pub,
+  width = 180,
+  height = 100,
+  units = "mm",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
